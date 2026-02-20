@@ -47,10 +47,8 @@ function displayExpenses()
 
     html2 +=
     `
-    <p>Total: ${total1}</p>;
-    
-    
-    `
+    <p>Total: $${total1}</p>
+    `;
     total.innerHTML = html2;
     output.innerHTML = html;
 
@@ -63,11 +61,12 @@ function editExpense(index) {
         expenseObject[index].name = newName;
         expenseObject[index].amount = newAmount;
         expenseObject[index].category = newCategory;
-        total1 = total1 - expenseObject[index].amount;
+        total1 += expenseObject[index].amount;
         displayExpenses();
 }
 
 function deleteExpense(index) {
     expenseObject.splice(index,1);
+    total1 = total1 - expenseObject[index].amount;
     displayExpenses();
 }
