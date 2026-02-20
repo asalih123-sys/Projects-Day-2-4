@@ -1,7 +1,7 @@
 let expenseObject = [
 
 ];
-
+ let total1 = 0;
 function addExpense() {
     let name = document.getElementById('expenseName').value.trim();
     let amount = Number(document.getElementById('expenseAmount').value);
@@ -16,13 +16,16 @@ function addExpense() {
     else {
         alert("Name must be written && Amount must be greater than 0");
     }
+    total1 += amount;
     displayExpenses()
 }
 
 function displayExpenses()
 {
     let output = document.getElementById('expense-table');
+    let total = document.getElementById('total-amount');
     let html = ``;
+    let html2 = ``;
     for (let i = 0; i < expenseObject.length; i++) {
         html +=
             `
@@ -41,7 +44,16 @@ function displayExpenses()
             </tr>
             `;
     }
+
+    html2 +=
+    `
+    <p>Total: ${total1}</p>;
+    
+    
+    `
+    total.innerHTML = html2;
     output.innerHTML = html;
+
 }
 
 function editExpense(index) {
@@ -51,6 +63,7 @@ function editExpense(index) {
         expenseObject[index].name = newName;
         expenseObject[index].amount = newAmount;
         expenseObject[index].category = newCategory;
+        total1 = total1 - expenseObject[index].amount;
         displayExpenses();
 }
 
